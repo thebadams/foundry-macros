@@ -1,23 +1,23 @@
 // HotbarUses5e: ActorID="TKneSvd2Ofb4T9bn" ItemID="25LRZG0SIBVi27Rp"
 
 const veshForms = {
-  winter: 'Veshgeimreadh',
-  spring: 'Veshearach',
-  summer: 'Veshsamradh',
-  autumn: 'Veshfomhar'
+  winter: { name: 'Veshgeimreadh', img: 'Galdrheim%20Assets/veshgeimreadh.jpg' },
+  spring: { name: 'Veshearach', img: 'Galdrheim%20Assets/veshearach.jpg' },
+  summer: { name: 'Veshsamradh', img: 'Galdrheim%20Assets/veshsamradh.jpg' },
+  autumn: { name: 'Veshfomhar', img: 'Galdrheim%20Assets/Veshfomhar.png' }
 };
 
 const getPossibleForms = (forms, currentForm) => {
   let possibleForms;
   switch (currentForm) {
-    case forms.winter:
+    case forms.winter.name:
       possibleForms = [forms.spring, forms.summer, forms.autumn];
       break
-    case forms.spring:
+    case forms.spring.name:
       possibleForms = [forms.summer, forms.autumn, forms.winter];
-    case forms.summer:
+    case forms.summer.name:
       possibleForms = [forms.autumn, forms.winter, forms.spring];
-    case forms.autumn:
+    case forms.autumn.name:
       possibleForms = [forms.winter, forms.spring, forms.summer];
     default:
       possibleForms = [forms.winter, forms.spring, forms.summer, forms.autumn];
@@ -34,5 +34,5 @@ const getNextForm = (forms, currentForm) => {
 }
 const vesh = game.actors.get("TKneSvd2Ofb4T9bn")
 const nextForm = getNextForm(veshForms, vesh.name)
-vesh.update({name: nextForm})
+vesh.update({name: nextForm.name, img: nextForm.img})
 console.log(vesh.name)
